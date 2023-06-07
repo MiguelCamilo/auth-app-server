@@ -12,6 +12,7 @@ export const UserSchema = new mongoose.Schema({
 		unique: true,
 	},
 	authentication: {
+		// select: false does not return password and salt when the user data is requested
 		password: { type: String, required: true, unique: false, select: false },
 		salt: { type: String, select: false}
 	},
@@ -28,3 +29,4 @@ export const getUserByEmail = (email) => UserModal.findOne({ email });
 export const getUserByUsername = (username) => UserModal.findOne({ username });
 export const createUser = (values) =>
 	new UserModal(values).save().then((user) => user.toObject());
+export const updateUserById = (id, values) => UserModal.findByIdAndUpdate(id, values)

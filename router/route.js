@@ -9,9 +9,9 @@ import { login } from "../controllers/login.js"
 import { getUser, updateUser } from "../controllers/user.js"
 
 // POST 
-router.route('/register').post(register)
 // router.route('/registerMail').post() // sends email
 router.route('/authenticate').post((req,res) => res.end())
+router.route('/register').post(register)
 router.route('/login').post(login)
 
 // GET 
