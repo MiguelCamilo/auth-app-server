@@ -1,4 +1,4 @@
-import UserModel from "../model/User.model.js"
+// import UserModel from "../model/User.model.js"
 
 export const getUser = async (req, res) => {
 	res.json("getUser route");

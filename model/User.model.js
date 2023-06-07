@@ -22,4 +22,10 @@ export const UserSchema = new mongoose.Schema({
 	profile: { type: String },
 });
 
-export default mongoose.model('User', UserSchema)
+export const UserModal = mongoose.model("User", UserSchema);
+
+// actions
+export const getUserByEmail = (email) => UserModal.findOne({ email });
+export const getUserByUsername = (username) => UserModal.findOne({ username });
+export const createUser = (values) =>
+	new UserModal(values).save().then((user) => user.toObject());
