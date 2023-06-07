@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import { random, authentication } from "../helpers/authentication.js";
 import { createUser, getUserByEmail, getUserByUsername } from "../model/User.model.js";
 
 /* post request with created user object data
@@ -15,9 +15,6 @@ import { createUser, getUserByEmail, getUserByUsername } from "../model/User.mod
 export const register = async (req, res) => {
 	try {
 		const { username, password, profile, email } = req.body;
-		// bycrypt returns a promise so await is needed
-		const hashedPassword = await bcrypt.hash(password, 10)
-		
 
 		const existingUsername = await getUserByUsername(username)
 		if(existingUsername) {
@@ -29,9 +26,13 @@ export const register = async (req, res) => {
 			return res.status(403).send({ message: "Email is taken."})
 		}
 
+		const salt = random()
 		const user = await createUser({
 			email,
-			password: hashedPassword,
+			authentication: {
+				salt,
+				password: authentication(salt, password),
+			},
 			profile: profile || '',
 			username
 		})
@@ -39,6 +40,7 @@ export const register = async (req, res) => {
 		return res.status(201).send({ message: "User Registered Succesfully.", user })
             
 	} catch (error) {
+		console.log(error)
 		return res.status(500).send(error);
 	}
 };
