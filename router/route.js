@@ -8,6 +8,10 @@ import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
 import { getUser, updateUser } from "../controllers/user.js"
 
+// import middleware
+import { isOwner } from "../middleware/authorization.js";
+import { isAuthorized } from "../middleware/authorization.js";
+
 // POST 
 // router.route('/registerMail').post() // sends email
 router.route('/authenticate').post((req,res) => res.end())
@@ -22,7 +26,7 @@ router.route('/createResetSession').get(controller.createResetSession)
 
 
 // PUT
-router.route('/updateUser').put(updateUser)
-router.route('/resetPassword').put(controller.resetPassword)
+router.route('/updateuser').put(isAuthorized, updateUser)
+router.route('/resetpassword').put(controller.resetPassword)
 
 export default router

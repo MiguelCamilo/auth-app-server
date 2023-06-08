@@ -29,4 +29,7 @@ export const getUserByEmail = (email) => UserModal.findOne({ email });
 export const getUserByUsername = (username) => UserModal.findOne({ username });
 export const createUser = (values) =>
 	new UserModal(values).save().then((user) => user.toObject());
-export const updateUserById = (id, values) => UserModal.findByIdAndUpdate(id, values)
+	// new: true returns the updated data
+export const updateUserById = (id, values) => UserModal.findByIdAndUpdate(id, values, { new: true });
+
+

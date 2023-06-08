@@ -1,4 +1,5 @@
-import { getUserByUsername } from "../model/User.model.js";
+import mongoose from "mongoose";
+import { getUserByUsername, updateUserById } from "../model/User.model.js";
 
 export const getUser = async (req, res) => {
 	try {
@@ -32,11 +33,27 @@ export const getUser = async (req, res) => {
   }
   */
 export const updateUser = async (req, res) => {
+
 	try {
-		const { id } = req.query.id
-		
+		// const id = req.query.id
+		// this property user is created when the isAuthorized func runs
+        // then its accessible in the updateUser function
+		const { userId } = req.user
+		const body = req.body
+
+		if (!mongoose.Types.ObjectId.isValid(userId)) {
+			return res.status(400).send({ message: "Invalid ID" });
+		  }
+
+		if(!body) {
+			return res.status(400).send({ message: "Data Required"})
+		}
+
+		const user = await updateUserById(userId, body)
+
+		return res.status(200).send({ message: "User Updated", data: user })
+
  	} catch (error) {
 		console.log(error)
-
 	}
 };
