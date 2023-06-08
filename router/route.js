@@ -4,24 +4,24 @@ const router = Router()
 
 // import controllers
 import * as controller from "../controllers/controller.js"
+import { generateOTP, verifyOTP } from "../controllers/otp.js";
 import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
-import { getUser, updateUser } from "../controllers/user.js"
+import { getUser, updateUser, verifyUser } from "../controllers/user.js"
 
 // import middleware
-import { isOwner } from "../middleware/authorization.js";
-import { isAuthorized } from "../middleware/authorization.js";
+import { isAuthorized, localVariables } from "../middleware/authorization.js";
 
 // POST 
 // router.route('/registerMail').post() // sends email
 router.route('/authenticate').post((req,res) => res.end())
 router.route('/register').post(register)
-router.route('/login').post(login)
+router.route('/login').post(verifyUser, login)
 
 // GET 
 router.route('/user/:username').get(getUser)
-router.route('/generateOTP').get(controller.generateOTP)
-router.route('/verifyOTP').get(controller.verifyOTP)
+router.route('/generateOTP').get(verifyUser, localVariables, generateOTP)
+router.route('/verifyOTP').get(verifyOTP)
 router.route('/createResetSession').get(controller.createResetSession)
 
 

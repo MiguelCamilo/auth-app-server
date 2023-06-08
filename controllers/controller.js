@@ -1,15 +1,4 @@
-import bcrypt from "bcrypt"
 
-
-// get req
-export const generateOTP = async (req, res) => {
-	res.json("generateOTP route");
-};
-
-// get req
-export const verifyOTP = async (req, res) => {
-	res.json("verifyOTP route");
-};
 
 // this will redirect user on succesful OTP verification
 export const createResetSession = async (req, res) => {
