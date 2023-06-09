@@ -3,10 +3,10 @@ import { Router } from "express";
 const router = Router()
 
 // import controllers
-import * as controller from "../controllers/controller.js"
 import { generateOTP, verifyOTP } from "../controllers/otp.js";
 import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
+import { resetPassword, createResetSession } from "../controllers/reset.js";
 import { getUser, updateUser, verifyUser } from "../controllers/user.js"
 
 // import middleware
@@ -22,11 +22,11 @@ router.route('/login').post(verifyUser, login)
 router.route('/user/:username').get(getUser)
 router.route('/generateOTP').get(verifyUser, localVariables, generateOTP)
 router.route('/verifyOTP').get(verifyOTP)
-router.route('/createResetSession').get(controller.createResetSession)
+router.route('/createResetSession').get(createResetSession)
 
 
 // PUT
 router.route('/updateuser').put(isAuthorized, updateUser)
-router.route('/resetpassword').put(controller.resetPassword)
+router.route('/resetpassword').put(resetPassword)
 
 export default router

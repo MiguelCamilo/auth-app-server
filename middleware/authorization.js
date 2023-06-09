@@ -26,6 +26,7 @@ export const isAuthorized = async (req, res, next) => {
     }
 }
 
+
 export const localVariables = (req, res, next) => {
     // access to the apps local vars
     req.app.locals = {
