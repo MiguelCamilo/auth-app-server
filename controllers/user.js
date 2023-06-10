@@ -3,7 +3,6 @@ import { getUserByUsername, updateUserById } from "../model/User.model.js";
 
 export const verifyUser = async (req, res, next) => {
     try {
-        
         const { username } = req.method == "GET" ? req.query : req.body;
 
         // check if the user exist

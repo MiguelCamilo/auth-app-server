@@ -33,6 +33,6 @@ connect().then(() => {
         console.log(error)
     }
 }).catch(error => {
-    console.log("Invalid database connection!")
+    console.log("Invalid database connection!", error)
 }) 
 
