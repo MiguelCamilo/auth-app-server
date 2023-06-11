@@ -1,4 +1,4 @@
-import { random, authentication } from "../helpers/authentication.js";
+import { random, authentication } from "../helpers/hash.js";
 import { createUser, getUserByEmail, getUserByUsername } from "../model/User.model.js";
 
 /* post request with created user object data

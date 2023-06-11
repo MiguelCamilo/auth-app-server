@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import { getUserByUsername } from "../model/User.model.js";
-import { authentication } from "../helpers/authentication.js";
+import { authentication } from "../helpers/hash.js";
 import ENV from "../env.config.js"
 
 /* post request

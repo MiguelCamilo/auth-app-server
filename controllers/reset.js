@@ -1,4 +1,5 @@
-import { getUserByUsername } from "../model/User.model.js";
+import { authentication } from "../helpers/hash.js";
+import { getUserByUsername, updateUserModel } from "../model/User.model.js";
 
 // this will redirect user on succesful OTP verification
 export const createResetSession = async (req, res) => {
@@ -22,7 +23,17 @@ export const resetPassword = async (req, res) => {
 			return res.status(500).send({ message: "Please provide a username and password." })
 		}
 
-		const user = await getUserByUsername(username)
+		getUserByUsername(username)
+			.then((user) => {
+				const hashedPassword = authentication(user.authentication.salt, password)
+				updateUserModel({ username: user.username}, { password: hashedPassword })
+				req.app.locals.resetSession = false // reset session
+				return res.status(201).send({ message: "Update Succesful! "})
+			})
+			.catch((error) => {
+				console.log(error)
+				return res.status(404).send({ error: "Username not found" })
+			})
 		
 
 	} catch (error) {

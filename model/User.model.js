@@ -22,14 +22,14 @@ export const UserSchema = new mongoose.Schema({
 	profile: { type: String },
 });
 
-export const UserModal = mongoose.model("User", UserSchema);
+export const UserModel = mongoose.model("User", UserSchema);
 
 // actions
-export const getUserByEmail = (email) => UserModal.findOne({ email });
-export const getUserByUsername = (username) => UserModal.findOne({ username });
-export const createUser = (values) =>
-	new UserModal(values).save().then((user) => user.toObject());
-	// new: true returns the updated data
-export const updateUserById = (id, values) => UserModal.findByIdAndUpdate(id, values, { new: true });
+export const getUserByEmail = (email) => UserModel.findOne({ email });
+export const getUserByUsername = (username) => UserModel.findOne({ username });
+export const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
+export const updateUserModel = (values) => UserModel.updateOne(values)
+// new: true returns the updated data
+export const updateUserById = (id, values) => UserModel.findByIdAndUpdate(id, values, { new: true });
 
 

@@ -3,11 +3,11 @@ import { Router } from "express";
 const router = Router()
 
 // import controllers
-import { generateOTP, verifyOTP } from "../controllers/otp.js";
 import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
-import { resetPassword, createResetSession } from "../controllers/reset.js";
+import { generateOTP, verifyOTP } from "../controllers/otp.js";
 import { getUser, updateUser, verifyUser } from "../controllers/user.js"
+import { resetPassword, createResetSession } from "../controllers/reset.js";
 
 // import middleware
 import { isAuthorized, localVariables } from "../middleware/authorization.js";
@@ -27,6 +27,6 @@ router.route('/createResetSession').get(createResetSession)
 
 // PUT
 router.route('/updateuser').put(isAuthorized, updateUser)
-router.route('/resetpassword').put(resetPassword)
+router.route('/resetpassword').put(verifyUser, resetPassword)
 
 export default router
