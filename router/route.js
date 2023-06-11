@@ -5,6 +5,7 @@ const router = Router()
 // import controllers
 import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
+import { emailVerification } from "../controllers/email.js";
 import { generateOTP, verifyOTP } from "../controllers/otp.js";
 import { getUser, updateUser, verifyUser } from "../controllers/user.js"
 import { resetPassword, createResetSession } from "../controllers/reset.js";
@@ -13,7 +14,7 @@ import { resetPassword, createResetSession } from "../controllers/reset.js";
 import { isAuthorized, localVariables } from "../middleware/authorization.js";
 
 // POST 
-// router.route('/registerMail').post() // sends email
+router.route('/registerMail').post(emailVerification) // sends email
 router.route('/authenticate').post((req,res) => res.end())
 router.route('/register').post(register)
 router.route('/login').post(verifyUser, login)
