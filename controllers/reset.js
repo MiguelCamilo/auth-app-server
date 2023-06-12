@@ -27,6 +27,7 @@ export const resetPassword = async (req, res) => {
 			.then((user) => {
 				const hashedPassword = authentication(user.authentication.salt, password)
 				updateUserModel({ username: user.username}, { password: hashedPassword })
+				
 				req.app.locals.resetSession = false // reset session
 				return res.status(201).send({ message: "Update Succesful! "})
 			})
