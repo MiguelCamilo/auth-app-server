@@ -9,7 +9,10 @@ const app = express()
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+//!CHANGE THIS BEFORE DEPLOY
+app.use(cors({
+    origin: "http://localhost:5173"
+}))
 app.use(morgan('tiny'))
 app.disable('x-powered-by')
 
