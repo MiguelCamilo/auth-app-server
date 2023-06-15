@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import cors from 'cors'
 import morgan from 'morgan'
 import router from './router/route.js'
@@ -8,13 +9,14 @@ import { connect } from './database/connection.js'
 const app = express()
 
 // middlewares
-app.use(express.json())
-//!CHANGE THIS BEFORE DEPLOY
-app.use(cors({
-    origin: "http://localhost:5173"
-}))
-app.use(morgan('tiny'))
-app.disable('x-powered-by')
+// express used to increase the limit of the request body
+// without error "PayloadTooLargeError: request entity too large" will be recieved
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ limit: '25mb', extended: false }));
+app.use(cors());
+app.use(morgan('tiny'));
+app.disable('x-powered-by');
+
 
 const port = 8080
 
