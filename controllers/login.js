@@ -37,7 +37,7 @@ export const login = async (req, res) => {
 		// compare hashed password to user password
         // here we send back the user with a salt and the password and it returns 
         // an encrypted string 
-		const expectedHash = authentication(user.authentication.salt, password);
+		let expectedHash = authentication(user.authentication.salt, password);
 
 		if (user.authentication.password !== expectedHash) {
 			return res.status(403).send({ message: "Invalid Credentials " });

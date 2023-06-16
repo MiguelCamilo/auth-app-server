@@ -28,8 +28,10 @@ export const UserModel = mongoose.model("User", UserSchema);
 export const getUserByEmail = (email) => UserModel.findOne({ email });
 export const getUserByUsername = (username) => UserModel.findOne({ username });
 export const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
-export const updateUserModel = (values) => UserModel.updateOne(values)
+// export const updateUserModel = (values) => UserModel.updateOne({ values })
 // new: true returns the updated data
 export const updateUserById = (id, values) => UserModel.findByIdAndUpdate(id, values, { new: true });
+
+export default mongoose.model.Users || mongoose.model('User', UserSchema);
 
 
