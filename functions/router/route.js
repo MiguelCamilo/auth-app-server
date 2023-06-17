@@ -21,7 +21,7 @@ router.route('/login').post(verifyUser, login)
 
 // GET 
 router.route('/user/:username').get(getUser)
-router.route('/generateOTP').get(verifyUser, localVariables, generateOTP) //! http://localhost:8080/api/generateOTP?username=example123
+router.route('/generateOTP').get(verifyUser, localVariables, generateOTP)
 router.route('/verifyOTP').get(verifyUser, verifyOTP)
 router.route('/createResetSession').get(createResetSession)
 

@@ -4,6 +4,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import router from './router/route.js'
 
+import ENV from "./env.config.js"
 import { db_connection } from './database/connection.js'
 
 const app = express()
@@ -13,7 +14,9 @@ const app = express()
 // without error "PayloadTooLargeError: request entity too large" will be recieved
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ limit: '25mb', extended: false }));
-app.use(cors());
+
+app.use(cors({ origin: `${ENV.ORIGIN}` }));
+
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
 
