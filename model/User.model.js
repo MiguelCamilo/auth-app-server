@@ -32,6 +32,7 @@ export const createUser = (values) => new UserModel(values).save().then((user) =
 // new: true returns the updated data
 export const updateUserById = (id, values) => UserModel.findByIdAndUpdate(id, values, { new: true });
 
+// if the collection 'User' exist then create "Users" plural
 export default mongoose.model.Users || mongoose.model('User', UserSchema);
 
 
