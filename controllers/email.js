@@ -34,7 +34,7 @@ export const emailVerification = async (req, res) => {
     let response = {
         body: {
             name : username,
-            intro: text || "Thank you for creating an Account with Auth App Co.",
+            intro: text,
             outro: "© Auth App LLC"
         }
     }
@@ -50,7 +50,7 @@ export const emailVerification = async (req, res) => {
 
     transporter.sendMail(message)
         .then(() => {
-            return res.status(201).send({ message: "Please check you email." })
+            return res.status(201).send({ message: "Please check your email." })
         })
         .catch((error) => {
             return res.status(500).json({ error })

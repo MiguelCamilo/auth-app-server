@@ -4,7 +4,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import router from './router/route.js'
 
-import { connect } from './database/connection.js'
+import { db_connection } from './database/connection.js'
 
 const app = express()
 
@@ -28,7 +28,7 @@ app.get('/', (req,res) => {
 app.use('/api', router)
 
 // connect only when their is a mongodb connection
-connect().then(() => {
+db_connection().then(() => {
     try {
         app.listen(port, () => {
             console.log(`Server Listening on http://localhost:${port}`)

@@ -37,7 +37,7 @@ export const register = async (req, res) => {
 			username
 		})
 
-		return res.status(201).send({ message: "User Registered Succesfully.", user })
+		return res.status(201).send({ message: "Thank you for creating an Account with Auth App Co.", user })
             
 	} catch (error) {
 		console.log(error)
