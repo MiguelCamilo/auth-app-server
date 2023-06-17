@@ -1,3 +1,4 @@
+import functions from "firebase-functions"
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -16,9 +17,6 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
 
-
-const port = 8080
-
 app.get('/', (req,res) => {
     res.status(201).json("Home GET Request")
 })
@@ -29,9 +27,7 @@ app.use('/api', router)
 // connect only when their is a mongodb connection
 db_connection().then(() => {
     try {
-        app.listen(port, () => {
-            console.log(`Server Listening on http://localhost:${port}`)
-        })
+        console.log("Connection Succesful!")
 
     } catch(error) {
         console.log(error)
@@ -40,3 +36,4 @@ db_connection().then(() => {
     console.log("Invalid database connection!", error)
 }) 
 
+export const api = functions.https.onRequest(app)
