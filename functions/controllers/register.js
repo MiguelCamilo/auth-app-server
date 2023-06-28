@@ -14,7 +14,7 @@ import { createUser, getUserByEmail, getUserByUsername } from "../model/User.mod
 */
 export const register = async (req, res) => {
 	try {
-		const { username, password, profile, email } = req.body;
+		const { firstName, lastName, username, password, profile, email } = req.body;
 
 		const existingUsername = await getUserByUsername(username)
 		if(existingUsername) {
@@ -34,7 +34,9 @@ export const register = async (req, res) => {
 				password: authentication(salt, password),
 			},
 			profile: profile || '',
-			username
+			username,
+			firstName,
+			lastName
 		})
 
 		return res.status(201).send({ message: "Thank you for creating an Account with Auth App Co.", user })
