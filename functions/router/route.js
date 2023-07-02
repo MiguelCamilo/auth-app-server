@@ -7,7 +7,7 @@ import { register } from "../controllers/register.js";
 import { login } from "../controllers/login.js"
 import { emailVerification } from "../controllers/email.js";
 import { generateOTP, verifyOTP } from "../controllers/otp.js";
-import { getUser, updateUser, verifyUser } from "../controllers/user.js"
+import { getUser, updateUser, getAllUsers, verifyUser } from "../controllers/user.js"
 import { resetPassword, createResetSession } from "../controllers/reset.js";
 
 // import middleware
@@ -20,6 +20,7 @@ router.route('/register').post(register)
 router.route('/login').post(verifyUser, login)
 
 // GET 
+router.route('/getallusers').get(getAllUsers)
 router.route('/user/:username').get(getUser)
 router.route('/generateOTP').get(verifyUser, localVariables, generateOTP)
 router.route('/verifyOTP').get(verifyUser, verifyOTP)

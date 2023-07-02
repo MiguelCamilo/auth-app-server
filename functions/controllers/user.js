@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
-import { getUserByUsername, updateUserById } from "../model/User.model.js";
+import { getUserByUsername, updateUserById, getUsers } from "../model/User.model.js";
 
 export const verifyUser = async (req, res, next) => {
     try {
         const { username } = req.method == "GET" ? req.query : req.body;
 
+		if(!username) return res.status(404).send({ error: "No username provided!" })
         // check if the user exist
         let exist = await getUserByUsername(username)
         if(!exist) return res.status(404).send({ error : "Can't find User!"});
@@ -34,6 +35,17 @@ export const getUser = async (req, res) => {
 		return res.status(403).send({ message: "Cannot find user data" });
 	}
 };
+
+export const getAllUsers = async (req, res) => {
+	try {
+		const users = await getUsers()
+		return res.status(201).send(users)
+
+	} catch (error) {
+		console.log(error)
+		return res.statu(500).send(error)
+	}
+}
 
 /* put request
 
