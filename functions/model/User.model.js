@@ -20,6 +20,7 @@ export const UserSchema = new mongoose.Schema({
 	lastName: { type: String },
 	phoneNumber: { type: Number },
 	profile: { type: String },
+	about: { type: String }
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
