@@ -25,7 +25,7 @@ export const UserSchema = new mongoose.Schema({
 export const UserModel = mongoose.model("User", UserSchema);
 
 // actions
-export const getUsers = () => UserModel.find().select('-profile') // returns all users without the profile field
+export const getUsers = () => UserModel.find() // returns all users without the profile field .select('-profile') 
 export const getUserByEmail = (email) => UserModel.findOne({ email });
 export const getUserByUsername = (username) => UserModel.findOne({ username });
 export const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
