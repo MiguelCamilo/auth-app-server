@@ -20,13 +20,14 @@ export const UserSchema = new mongoose.Schema({
 	lastName: { type: String },
 	phoneNumber: { type: Number },
 	profile: { type: String },
-	about: { type: String }
+	about: { type: String },
+	jobTitle: { type: String },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
 
 // actions
-export const getUsers = () => UserModel.find() // returns all users without the profile field .select('-profile') 
+export const getUsers = () => UserModel.find().sort({ _id: -1 }) // returns all users without the profile field .select('-profile') 
 export const getUserByEmail = (email) => UserModel.findOne({ email });
 export const getUserByUsername = (username) => UserModel.findOne({ username });
 export const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
